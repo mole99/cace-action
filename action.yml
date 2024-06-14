@@ -13,7 +13,7 @@ inputs:
   cace_rev:
     description: 'CACE commit hash'
     required: false
-    default: 'a0fc92d7f1a2ca14e3a1068ca96190cea530d845'
+    default: '8c2ff9383d89e5a491344c913938a55d57ce83b8'
   cace_root:
     description: 'working directory'
     required: false
