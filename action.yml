@@ -63,16 +63,13 @@ runs:
       with:
         name: openlane
         extraPullNames: openlane
-    # Use devShell from CACE
-    - name: Use devShell
-      uses: rrbutani/use-nix-shell-action@v1
-      with:
-        devShell: github:efabless/cace/${{ inputs.cace_rev }}
     # Run CACE
     - name: Run CACE
-      shell: bash
-      run: |
-        # Run CACE inside CACE_ROOT
-        cd ${{ github.workspace }}
-        cd ${{ inputs.cace_root }}
-        cace ${{ inputs.cace_datasheet }} --source ${{ inputs.cace_source }} ${{ inputs.cace_args }}
+      uses: workflow/nix-shell-action@v3.3.2
+      with:
+        flakes: github:efabless/cace/${{ inputs.cace_rev }}
+        script: |
+          # Run CACE inside CACE_ROOT
+          cd ${{ github.workspace }}
+          cd ${{ inputs.cace_root }}
+          cace ${{ inputs.cace_datasheet }} --source ${{ inputs.cace_source }} ${{ inputs.cace_args }}
