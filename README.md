@@ -2,9 +2,9 @@
 
 GitHub composite action for CACE.
 
-Insert the composite action into a workflow to set up the environment (PDK and tools) for CACE and execute it inside your repository:
+Include the composite action in a workflow to set up the environment (PDK and tools) for CACE and run it on your design:
 
-```
+```yaml
 ...
       - name: Setup Environment and Run CACE
         uses: efabless/cace-action@main
@@ -15,7 +15,7 @@ Insert the composite action into a workflow to set up the environment (PDK and t
 
 The following inputs are provided to customize the action, for example:
 
-```
+```yaml
 ...
       - name: Setup Environment and Run CACE
         uses: efabless/cace-action@main
