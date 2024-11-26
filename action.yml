@@ -40,6 +40,10 @@ runs:
     - name: Install volare
       shell: bash
       run: |
+        # set PATH so it includes user's private bin if it exists
+        if [ -d "$HOME/.local/bin" ] ; then
+            PATH="$HOME/.local/bin:$PATH"
+        fi
         python3 -m pip install volare
     - name: Cache ${{ inputs.pdk_family }} PDK
       uses: actions/cache@v3
