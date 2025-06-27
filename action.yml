@@ -46,7 +46,7 @@ runs:
       uses: DeterminateSystems/nix-installer-action@main
       with:
         extra-conf: |
-          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+          access-tokens = github.com=${{ inputs.token }}
           extra-substituters = https://nix-cache.fossi-foundation.org
           extra-trusted-public-keys = nix-cache.fossi-foundation.org:3+K59iFwXqKsL7BNu6Guy0v+uTlwsxYQxjspXzqLYQs=
 
