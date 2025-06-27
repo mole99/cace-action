@@ -40,20 +40,15 @@ inputs:
 runs:
   using: "composite"
   steps:
-
+    
     # Install Nix
     - name: Install Nix
-      uses: cachix/install-nix-action@v27
+      uses: DeterminateSystems/nix-installer-action@main
       with:
-        extra_nix_config: |
-          access-tokens = github.com=${{ inputs.token }}
-
-    # Setup the binary cache
-    - name: Setup cache
-      uses: cachix/cachix-action@v14
-      with:
-        name: openlane
-        extraPullNames: openlane
+        extra-conf: |
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+          extra-substituters = https://nix-cache.fossi-foundation.org
+          extra-trusted-public-keys = nix-cache.fossi-foundation.org:3+K59iFwXqKsL7BNu6Guy0v+uTlwsxYQxjspXzqLYQs=
 
     # Install the PDK from cache if available
     - name: Cache ${{ inputs.pdk_family }} PDK
