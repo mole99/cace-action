@@ -7,7 +7,7 @@ Include the composite action in a workflow to set up the environment (PDK and to
 ```yaml
 ...
       - name: Setup Environment and Run CACE
-        uses: efabless/cace-action@main
+        uses: mole99/cace-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ...
@@ -18,7 +18,7 @@ The following inputs are provided to customize the action, for example:
 ```yaml
 ...
       - name: Setup Environment and Run CACE
-        uses: efabless/cace-action@main
+        uses: mole99/cace-action@main
         with:
           pdk_family: 'sky130'
           open_pdks_rev: '4d5af10bfee4dab799566aaf903bb22aee69bac9'
