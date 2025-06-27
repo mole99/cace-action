@@ -13,7 +13,7 @@ inputs:
   open_pdks_rev:
     description: 'PDK hash for volare'
     required: false
-    default: '0fe599b2afb6708d281543108caf8310912f54af'
+    default: '823ec23c421cfb1d6aec06b8140cbde11cbc95a0'
   cace_rev:
     description: 'CACE commit hash'
     required: false
