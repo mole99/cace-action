@@ -2,16 +2,16 @@ name: 'CACE'
 description: 'Composite action to run a CACE design'
 
 inputs:
-  volare_rev:
-    description: 'Volare commit hash'
+  ciel_rev:
+    description: 'Ciel commit hash'
     required: false
     default: 'main'
   pdk_family:
-    description: 'PDK family supported by volare, such as sky130'
+    description: 'PDK family supported by ciel, such as sky130'
     required: false
     default: 'sky130'
   open_pdks_rev:
-    description: 'PDK hash for volare'
+    description: 'PDK hash for ciel'
     required: false
     default: '823ec23c421cfb1d6aec06b8140cbde11cbc95a0'
   cace_rev:
@@ -59,23 +59,23 @@ runs:
     - name: Cache ${{ inputs.pdk_family }} PDK
       uses: actions/cache@v3
       with:
-        path: ${{ github.workspace }}/.volare-${{ inputs.pdk_family }}
+        path: ${{ github.workspace }}/.ciel-${{ inputs.pdk_family }}
         key: cache-${{ inputs.pdk_family }}-pdk-${{ inputs.open_pdks_rev }}
 
-    # Install PDK using volare
+    # Install PDK using ciel
     - name: Enable ${{ inputs.pdk_family }} PDK
       uses: workflow/nix-shell-action@v3.3.2
       with:
-        flakes: github:efabless/volare/${{ inputs.volare_rev }}
+        flakes: github:fossi-foundation/ciel/${{ inputs.ciel_rev }}
         script: |
-          volare enable --pdk ${{ inputs.pdk_family }} --pdk-root ${{ github.workspace }}/.volare-${{ inputs.pdk_family }} ${{ inputs.open_pdks_rev }}
-          echo "PDK_ROOT=${{ github.workspace }}/.volare-${{ inputs.pdk_family }}" >> $GITHUB_ENV
+          ciel enable --pdk-family ${{ inputs.pdk_family }} --pdk-root ${{ github.workspace }}/.ciel-${{ inputs.pdk_family }} ${{ inputs.open_pdks_rev }}
+          echo "PDK_ROOT=${{ github.workspace }}/.ciel-${{ inputs.pdk_family }}" >> $GITHUB_ENV
 
     # Run CACE
     - name: Run CACE
       uses: workflow/nix-shell-action@v3.3.2
       with:
-        flakes: github:efabless/cace/${{ inputs.cace_rev }}
+        flakes: github:fossi-foundation/cace/${{ inputs.cace_rev }}
         script: |
           # Run CACE inside CACE_ROOT
           cd ${{ github.workspace }}
